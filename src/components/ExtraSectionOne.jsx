@@ -66,7 +66,7 @@ const ExtraSectionOne = () => {
                  </div>
                   <div className='flex justify-center items-center'>
                       {/* <Button ></Button> */}
-                      <Link href={'/login'} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl bg-[#35858E] text-white font-normal text-xl">Join our Community
+                      <Link href={'/login'} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl bg-[#35858E] text-white font-normal text-xl p-5">Join our Community
                        <CiLock className='' />
                       </Link>                  
                   </div>

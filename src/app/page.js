@@ -1,14 +1,14 @@
 import Banner from "@/components/Banner/Banner";
 import ExtraSectionOne from "@/components/ExtraSectionOne";
-import NavBar from "@/components/NavBar";
-import Image from "next/image";
+import OurInstractor from "@/components/OurInstractor";
 
 export default function Home() {
+  
   return (
       <div>
-         <NavBar></NavBar>
          <Banner></Banner>
          <ExtraSectionOne></ExtraSectionOne>
+         <OurInstractor></OurInstractor>
       </div>
   );
 }
