@@ -17,7 +17,7 @@ const NavBar = () => {
             </Link>
           </li>
           <li>
-            <Link href="#">Add Tutors</Link>
+            <Link href="/add-tutor">Add Tutors</Link>
           </li>
           <li>
             <Link href="#">My Booked Sessions</Link>

@@ -7,11 +7,12 @@ import { PiStudent } from "react-icons/pi";
 import { IoMdTime } from "react-icons/io";
 import { MdCalendarMonth } from 'react-icons/md';
 import { SiKnowledgebase } from 'react-icons/si';
+import Link from 'next/link';
 
 const TutorCard = ({tutor}) => {
     return (
         <div className='relative'>
-             <div className='group relative aspect-4/3 w-full overflow-hidden rounded-2xl bg-slate-100 shadow-md transition-all duration-300 hover:shadow-xl'>
+             <div className='group relative aspect-square w-full overflow-hidden rounded-2xl  bg-slate-100 shadow-md transition-all duration-300 hover:shadow-xl'>
                     <Image src={tutor.photo} alt='tutor.png'  fill 
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                     unoptimized></Image>
@@ -22,7 +23,7 @@ const TutorCard = ({tutor}) => {
                      <p className="flex items-center gap-2 text-gray-600">
                     <PiStudent className="text-lg" />
                     <span>
-                        Studies at{" "}
+                        Studies at {" "}
                         <span className="font-semibold text-gray-900">
                         {tutor.institution}
                         </span>
@@ -40,7 +41,9 @@ const TutorCard = ({tutor}) => {
                         </div>
                     </div>
 
-                    <Button className={'bg-[#35858E] w-full'}>Book Now</Button>
+                   <Link href={`/tutors/${tutor._id}`}>
+                      <Button className={'bg-[#35858E] w-full'}>Book Now</Button>
+                   </Link>
                 </div>
         </div>
     );

@@ -12,9 +12,9 @@ const Footer = () => {
           
 
           <div className="space-y-4">
-            <div className="relative h-12 w-32">
+            <div className="relative h-20 w-32">
               <Image 
-                src="/assets/tutoria.png" 
+                src="/assests/tutoria.png" 
                 alt="Tutoria Logo" 
                 fill 
                 className="object-contain"

@@ -1,9 +1,5 @@
 import { getTutors } from '@/lib/action';
-import { Button } from '@heroui/react';
-import Image from 'next/image';
 import React from 'react';
-import { FaChalkboardTeacher } from "react-icons/fa";
-import { IoLocation } from "react-icons/io5";
 import TutorCard from './TutorCard';
 import Link from 'next/link';
 
