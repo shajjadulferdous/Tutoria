@@ -4,6 +4,7 @@ import React from 'react';
 const Temp = () => {
     return (
          <div className='h-screen flex justify-center items-center flex-col'>
+            <h1>hleglgl</h1>
                      <div>
                         <Image src={'/assests/tutoria.png'} alt="logo" width={120} height={120} className='grayscale-100'></Image>
                      </div>

@@ -1,7 +1,14 @@
-import React from 'react';
+'use client'
+import { Button, Dropdown, Header, Label } from '@heroui/react';
+import React, { useState } from 'react';
+import { CiLocationOn } from 'react-icons/ci';
+import { MdPeopleOutline, MdSchedule, MdSubject } from 'react-icons/md';
 
 const AddTutorPage = () => {
+    const [selected, setSelected] = useState('');
+    
     return (
+        
         <div className='w-11/12 max-w-7xl mx-auto my-20'>
             <h1 className='font-bold text-4xl'>Add New Tutor</h1>
             <p>Fill in the details below to register a new tutor on the platform.</p>
@@ -18,13 +25,177 @@ const AddTutorPage = () => {
                     <span className='font-bold  w-10 h-10 bg-[#35858E] flex justify-center items-center text-white rounded-full'>3</span>
                     <p className='text-[#35858E] font-bold'>Details</p>
                 </div>
-                <div className='p-3 bg-white flex justify-center items-center gap-2'>
+                <div className='p-3 bg-white flex justify-center items-center gap-5'>
                     <span className='font-bold  w-10 h-10 bg-[#35858E] flex justify-center items-center text-white rounded-full'>4</span>
                     <p className='text-[#35858E] font-bold'>Preferences</p>
                 </div>
             </div>
+             <form action="" className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 my-20'>
+                <div className='w-full h-full space-y-2'>
+                 <div className='flex gap-3'>
+                    <div className='w-12 h-12 rounded-full bg-[#35858E] text-white flex items-center justify-center'>
+                        <MdPeopleOutline className='w-6 h-6' />
+                    </div>
+                    <div>
+                        <h2 className='font-bold text-xl'>Personal Information</h2>
+                        <p className='text-slate-600'>Tutors identity and photo</p>
+                    </div>
+                 </div>
+                <div className='flex flex-col'>
+                     <label className="font-bold">Tutor Full Name</label>
+                     <input type="text" name='name' className="input outline-none hover:border-[#35858E]" placeholder="e.g Md Shajjadul ferdous" required />
+                 </div>
+                  <div className='flex flex-col'>
+                     <label className="font-bold">Tutor Photo URL</label>
+                     <input type="text" name='photo' className="input outline-none hover:border-[#35858E]" placeholder="image url" required/>
+                     <p className='text-slate-600 text-sm'>Paste the direct image link from imgbb or postimage</p>
+                 </div>
+                </div>
+
+                <div className='w-full h-full space-y-2'>
+                 <div className='flex gap-3'>
+                    <div className='w-12 h-12 rounded-full bg-[#35858E] text-white flex items-center justify-center'>
+                        <MdSubject className='w-6 h-6' />
+                    </div>
+                    <div>
+                        <h2 className='font-bold text-xl'>Subject & Institution</h2>
+                        <p className='text-slate-600'>Academic background and teaching area</p>
+                    </div>
+                </div>
+                <div className='flex flex-col'>
+                     <label className="font-bold">Subject / Category</label>
+                     <input type="text" name='subject'required className="input outline-none hover:border-[#35858E]" placeholder="e.g Mathmatics" />
+                 </div>
+                  <div className='flex flex-col'>
+                     <label className="font-bold">Institution</label>
+                     <input type="text" name='institution' required className="input outline-none hover:border-[#35858E]" placeholder="e.g. University of Dhaka" />
+                   
+                 </div>
+                  <div className='flex flex-col'>
+                     <label className="font-bold">Experience</label>
+                     <input type="text" name='experience' className="input outline-none hover:border-[#35858E]" placeholder="e.g. 3years" />
+                  
+                 </div>
+                </div>
+                 
+                 <div className='w-full h-full space-y-2'>
+                 <div className='flex gap-3'>
+                    <div className='w-12 h-12 rounded-full bg-[#35858E] text-white flex items-center justify-center'>
+                        <CiLocationOn className='w-6 h-6' />
+                    </div>
+                    <div>
+                        <h2 className='font-bold text-xl'>Location & Teaching Mode</h2>
+                        <p className='text-slate-600'>Where and how the tutor teaches</p>
+                    </div>
+                </div>
+                <div className='flex flex-col'>
+                     <label className="font-bold">Area</label>
+                     <input type="text" name='location' className="input outline-none hover:border-[#35858E]" placeholder="e.g Mathmatics" />
+                 </div>
+                  <div className='flex flex-col gap-2'>
+                  <label className="font-bold">Teaching Mode</label>
+
+                    <Dropdown>
+                        <Button
+                        className="input outline-none  bg-white border border-slate-300 hover:border-[#35858E] rounded-xl px-4 flex justify-between items-center shadow-none text-black"
+                        >
+                        <span className="capitalize text-slate-700">
+                            {Array.from(selected)[0] || 'Select teaching mode'}
+                        </span>
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-5 h-5 text-slate-500"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                            />
+                        </svg>
+                        </Button>
+                        
+                        <Dropdown.Popover className=" rounded-2xl border border-slate-200 shadow-xl">
+                        <Dropdown.Menu
+                            selectedKeys={selected}
+                            selectionMode="single"
+                            onSelectionChange={setSelected}
+                        >
+                            <Dropdown.Section title="Teaching Mode">
+                            <Dropdown.Item
+                                id="online"
+                                className="py-3 rounded-lg hover:bg-[#35858E]/10"
+                            >
+                                Online
+                            </Dropdown.Item>
+
+                            <Dropdown.Item
+                                id="offline"
+                                className="py-3 rounded-lg hover:bg-[#35858E]/10"
+                            >
+                                Offline
+                            </Dropdown.Item>
+
+                            <Dropdown.Item
+                                id="both"
+                                className="py-3 rounded-lg hover:bg-[#35858E]/10"
+                            >
+                                Both
+                            </Dropdown.Item>
+
+                            </Dropdown.Section>
+                        </Dropdown.Menu>
+                        </Dropdown.Popover>
+                   </Dropdown>
+                    <p className="text-sm text-slate-500">
+                        Choose how the tutor will conduct classes
+                    </p>
+                </div>
+                </div>
+
+                <div className='w-full h-full space-y-2'>
+                 <div className='flex gap-3'>
+                    <div className='w-12 h-12 rounded-full bg-[#35858E] text-white flex items-center justify-center'>
+                      <MdSchedule className='w-6 h-6' />
+                    </div>
+                    <div>
+                        <h2 className='font-bold text-xl'>Schedule & Availability</h2>
+                        <p className='text-slate-600'>Days, time slots, and session start date</p>
+                    </div>
+                </div>
+                <div className='flex flex-col'>
+                     <label className="font-bold">Available Days</label>
+                     <input type="text" name='availableDays' className="input outline-none hover:border-[#35858E]" placeholder="e.g Sat-Thu" required/>
+                 </div>
+                  <div className='flex flex-col'>
+                     <label className="font-bold">Available Time Slot</label>
+                     <input type="text" name='timeSlot' className="input outline-none hover:border-[#35858E]" placeholder="e.g. University of Dhaka" required />
+                   
+                 </div>
+                  <div className='flex flex-col'>
+                     <label className="font-bold">Session Start Date</label>
+                     <input type="date" name='sessionStartDate' required className="input outline-none hover:border-[#35858E]" placeholder="e.g. 3years" />
+                 </div>
+                  <div className='flex flex-col'>
+                     <label className="font-bold">Total Slots</label>
+                     <input type="text" name='totalSlot' required className="input outline-none hover:border-[#35858E]" placeholder="e.g. 20" />
+                     <p className='text-slate-600 text-sm'>Max number of students</p>
+                 </div>
+                 <div className='flex flex-col'>
+                     <label className="font-bold">Hourly Fee</label>
+                     <input type="text" name='hourlyFee' required className="input outline-none hover:border-[#35858E]" placeholder="e.g. 500" />
+                     <p className='text-slate-600 text-sm'>Amount in BDT</p>
+                 </div>
+                </div>
+
+                 <Button type='submit' className={`bg-[#35858E]  mt-4 w-xs`}>Register Tutor</Button>
+             </form>
         </div>
     );
 };
 
-export default AddTutorPage;
+export default AddTutorPage; 

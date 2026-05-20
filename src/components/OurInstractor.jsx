@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const OurInstractor = async() => {
     const tutors = await getTutors(5);
-    // console.log(tutors);
+
     return (
         <div className=''>
              <p className='text-center text-gray-600 text-xl'>MEET THE TEAM</p>
@@ -16,11 +16,12 @@ const OurInstractor = async() => {
                  }
              </div>
               <div className='flex justify-center items-center'>
-                      <Link href={'/tutors'} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl bg-[#35858E] text-white font-normal text-xl p-5">Meet Our Instructors                   
+                      <Link href={'/tutors'} className="btn btn-xs+2031 sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl bg-[#35858E] text-white font-normal text-xl p-5">Meet Our Instructors                   
                       </Link>                  
              </div>
         </div>
     );
 };
+
 
 export default OurInstractor;
