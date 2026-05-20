@@ -4,8 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { authClient } from '@/lib/auth-client';
-import { toast } from 'react-toastify';
 import { redirect } from 'next/navigation';
+import toast from 'react-hot-toast';
+import { Button } from '@heroui/react';
+import { Icon } from '@iconify-icon/react';
 
 const LoginPage = () => {
         const { register, handleSubmit, formState: { errors },} = useForm();
@@ -28,47 +30,46 @@ const LoginPage = () => {
     
     const handleError = (errors)=>{
             if (errors.email){
-                 toast.warning("Email Must Required");
+                  toast.error("Email Must Required");
             }
             else {
-                  toast.warning('Password Must Be given');
+                   toast.error('Password Must Be given');
             }
         }
     const handleSignInGoogle = async()=>{
             const data = await authClient.signIn.social({
                 provider: "google",
             });
-            console.log(data)
      }
 
     return (
         <div className='h-screen flex justify-center items-center flex-col'>
              <div>
-                <Image src={`/assests/tutoria.png`} alt="logo" width={120} height={120} className='grayscale-100'></Image>
+                <Image src={`/assests/tutoria.png`} alt="logo" width={180} height={180} className='grayscale-100'></Image>
              </div>
-            <h1 className='font-semibold text-xl text-gray-600'>Sign in to EduApa</h1>
+            <h1 className='font-semibold text-xl text-gray-600'>Sign in to Tutoria</h1>
             <div>
                 <form onSubmit={handleSubmit(handleLogin , handleError)}>
                 <fieldset className="fieldset rounded-box w-85 sm:w-100  p-4">
                 <label className="label text-gray-600 font-semibold text-[16px]">Email</label>
-                <input type="email" {...register('email', { required: true })} className="input outline-none w-85 sm:w-100  hover:border-blue-500 hover:border-2" placeholder="Email" />
+                <input type="email" {...register('email', { required: true })} className="input outline-none w-85 sm:w-100  hover:border-[#35858E] hover:border-2" placeholder="Email" />
 
                 <label className="label text-gray-600 font-semibold text-[16px]">Password</label>
-                <input type="password" {...register('password', { required: true })} className="input outline-none w-85 sm:w-100  hover:border-blue-500 hover:border-2" placeholder="Password" />
+                <input type="password" {...register('password', { required: true })} className="input outline-none w-85 sm:w-100  hover:border-[#35858E] hover:border-2" placeholder="Password" />
 
-                <button className="btn bg-orange-600 text-white mt-4">Sign in</button>
+                <Button className="w-full bg-[#35858E] text-white mt-4">Sign in</Button>
                 </fieldset>
                 </form>
 
                  <p className='flex justify-center text-slate-500'>-------------------- OR --------------------</p>
 
                 <div className='flex justify-center mt-5'>
-                    <button onClick={handleSignInGoogle} className="btn  text-black bg-base-200 w-85 sm:w-100  border-[#e5e5e5]">
-                    <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path d="m0 0H512V512H0" fill="#fff"></path><path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path><path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path><path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path><path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path></g></svg>
-                     Continue with Google
-                    </button>
+                      <Button onClick={handleSignInGoogle} className="w-full" variant="tertiary">
+                         <Icon icon="devicon:google" />
+                          Continue with Google
+                      </Button>
                 </div>
-                <p className='text-center mt-4'>New to EduApa ? <Link href={'/register'} className='text-blue-500'>Create an Account</Link></p>
+                <p className='text-center mt-4'>New to Tutoria ? <Link href={'/register'} className='text-blue-500'>Create an Account</Link></p>
             </div>
         </div>
     );

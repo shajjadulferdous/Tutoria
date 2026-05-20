@@ -70,7 +70,7 @@ const NavBar = () => {
         </ul>
         
         <div className="hidden items-center gap-4 md:flex">
-          <Link className='text-black font-semibold' href="#">Login</Link>
+          <Link className='text-black font-semibold' href="/login">Login</Link>
           <Button>Sign Up</Button>
         </div>
       </header>
@@ -79,7 +79,7 @@ const NavBar = () => {
           <ul className="flex flex-col gap-2 p-4">
              {links}
             <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
-              <Link href="#" className="block py-2">
+              <Link href="/login" className="block py-2">
                 Login
               </Link>
               <Button className="w-full">Sign Up</Button>
