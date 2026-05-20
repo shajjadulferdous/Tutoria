@@ -1,11 +1,20 @@
 'use client'
-import { Button } from '@heroui/react';
+import { authClient } from '@/lib/auth-client';
+import { Avatar, Button } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
 const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+     const { 
+        data: session, 
+        isPending, //loading state
+        error, //error object
+        refetch //refetch the session
+    } = authClient.useSession() 
+    // console.log(session?.user);
+    const user = session?.user;
     const links = <>
       
           <li >
@@ -20,7 +29,10 @@ const NavBar = () => {
             <Link href="/add-tutor">Add Tutors</Link>
           </li>
           <li>
-            <Link href="#">My Booked Sessions</Link>
+            <Link href="/my-tutor">My Tutors</Link>
+          </li>
+          <li>
+            <Link href="#">My Sessions</Link>
           </li>
 
     </>
@@ -70,8 +82,12 @@ const NavBar = () => {
         </ul>
         
         <div className="hidden items-center gap-4 md:flex">
-          <Link className='text-black font-semibold' href="/login">Login</Link>
-          <Button>Sign Up</Button>
+          {user?  <Avatar>
+        <Avatar.Image alt={user?.name} src={user?.image} />
+         <Avatar.Fallback>{user?.name.charAt(0)||'S'}</Avatar.Fallback>
+        </Avatar>:
+          <><Link className='text-black' href="/login">Login</Link>
+          <Button variant='ghost'>Sign Up</Button></>}
         </div>
       </header>
       {isMenuOpen && (

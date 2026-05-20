@@ -57,10 +57,9 @@ const LoginPage = () => {
                 <label className="label text-gray-600 font-semibold text-[16px]">Password</label>
                 <input type="password" {...register('password', { required: true })} className="input outline-none w-85 sm:w-100  hover:border-[#35858E] hover:border-2" placeholder="Password" />
 
-                <Button className="w-full bg-[#35858E] text-white mt-4">Sign in</Button>
+                <Button type='submit' className="w-full bg-[#35858E] text-white mt-4">Sign in</Button>
                 </fieldset>
                 </form>
-
                  <p className='flex justify-center text-slate-500'>-------------------- OR --------------------</p>
 
                 <div className='flex justify-center mt-5'>

@@ -8,7 +8,7 @@ const page = async() => {
     return (
         <div className='grid grid-cols-3 gap-5 w-11/12 mx-auto my-10'>
                  {
-                    tutors.map(tutor =>  <TutorCard key={tutor.id} tutor={tutor}></TutorCard>)
+                    tutors.map((tutor, index )=>  <TutorCard key={index} tutor={tutor}></TutorCard>)
                  }
          </div>
     );
