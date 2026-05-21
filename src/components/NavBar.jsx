@@ -1,8 +1,9 @@
 'use client'
 import { authClient } from '@/lib/auth-client';
-import { Avatar, Button } from '@heroui/react';
+import { Avatar, Button, Dropdown, Label } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import React, { useState } from 'react';
 
 const NavBar = () => {
@@ -13,7 +14,6 @@ const NavBar = () => {
         error, //error object
         refetch //refetch the session
     } = authClient.useSession() 
-    // console.log(session?.user);
     const user = session?.user;
     const links = <>
       
@@ -25,15 +25,20 @@ const NavBar = () => {
               Tutors
             </Link>
           </li>
-          <li>
-            <Link href="/add-tutor">Add Tutors</Link>
-          </li>
-          <li>
-            <Link href="/my-tutor">My Tutors</Link>
-          </li>
-          <li>
-            <Link href="/my-session">My Sessions</Link>
-          </li>
+           {
+             user && <>
+                <li>
+                <Link href="/add-tutor">Add Tutors</Link>
+              </li>
+              <li>
+                <Link href="/my-tutor">My Tutors</Link>
+              </li>
+              <li>
+                <Link href="/my-session">My Sessions</Link>
+              </li>
+             </>
+           }
+         
 
     </>
     return (
@@ -82,10 +87,24 @@ const NavBar = () => {
         </ul>
         
         <div className="hidden items-center gap-4 md:flex">
-          {user?  <Avatar>
-        <Avatar.Image alt={user?.name} src={user?.image} />
-         <Avatar.Fallback>{user?.name.charAt(0)||'S'}</Avatar.Fallback>
-        </Avatar>:
+          {user?  <Dropdown>
+        <Button aria-label="Menu" variant="ghost" size="icon" className="p-0 rounded-full">
+          <Avatar>
+          <Avatar.Image alt={user?.name} src={user?.image} />
+          <Avatar.Fallback>{user?.name.charAt(0)||'S'}</Avatar.Fallback>
+          </Avatar>
+        </Button>
+      <Dropdown.Popover>
+        <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
+          <Dropdown.Item id="new-file" >
+            <Link href={'/my-profile'}>Profile</Link>
+          </Dropdown.Item>
+          <Dropdown.Item id="copy-link">
+            <button onClick={async()=>{await authClient.signOut(); redirect('/')}}>Logout</button>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown.Popover>
+    </Dropdown>:
           <><Link className='text-black' href="/login">Login</Link>
           <Button variant='ghost'>Sign Up</Button></>}
         </div>
