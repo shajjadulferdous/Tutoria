@@ -1,12 +1,38 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import {Envelope} from "@gravity-ui/icons";
 import {Button, Input, Label, Modal, Surface, TextField} from "@heroui/react";
+import { redirect, useRouter } from "next/navigation";
+
 
 export function ModalForm({tutor}) {
+   const router = useRouter();
+   const { 
+        data: session, 
+        isPending, //loading state
+        error, //error object
+        refetch //refetch the session
+    } = authClient.useSession() 
+  const id = session?.user?.id;
   const handleSubmit = async(formData)=>{
        const booking = Object.fromEntries(formData.entries());
-       console.log(booking);
+       booking.userId = id;
+       booking.status = 'active';
+       const res = await fetch(`http://localhost:8080/my-session`,
+        {
+          method:'POST',
+          headers:{
+             'Content-type':'application/json'
+          },
+          body:JSON.stringify(booking)
+        }
+       )
+       if(!res.ok){
+           console.log('Something went wrong when confim booking');
+           return;
+       }
+       router.push('/my-session');
   }
   return (
     <Modal>
