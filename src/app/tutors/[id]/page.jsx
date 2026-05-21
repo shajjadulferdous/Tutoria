@@ -1,20 +1,22 @@
 import { getDetailsTutor } from '@/lib/action';
 import Image from 'next/image';
 import React from 'react';
-import { Button, Modal } from '@heroui/react';
 import { 
   FaChalkboardTeacher, FaRegClock, FaGraduationCap, 
-  FaBriefcase, FaCalendarCheck, FaHourglassHalf, FaAward 
+  FaBriefcase, FaCalendarCheck, FaHourglassHalf 
 } from 'react-icons/fa';
-import { IoLocation, IoArrowBackOutline } from 'react-icons/io5';
+import { IoLocation} from 'react-icons/io5';
 import { MdCalendarMonth, MdVerifiedUser } from 'react-icons/md';
-import Link from 'next/link';
 import { ModalForm } from '@/components/ModalForm';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 
 const TutorDetailsPage = async ({ params }) => {
   const { id } = await params;
-  const details = await getDetailsTutor(id);
-
+  const {token} = await auth.api.getToken({
+      headers: await headers()
+  })
+  const details = await getDetailsTutor(id , token);
   return (
      <>
        <div className='w-11/12 mx-auto my-20'>

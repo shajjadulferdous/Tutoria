@@ -1,4 +1,5 @@
 'use client'
+import { authClient } from '@/lib/auth-client';
 import { Envelope } from '@gravity-ui/icons';
 import { Button, Dropdown, Input, Label, Modal, Surface, TextField } from '@heroui/react';
 import React, { useState } from 'react';
@@ -10,10 +11,17 @@ const EditCard = ({tutor , handleRevalidate}) => {
     const handleSubmit = async(formData) =>{
           const tutorDetails = Object.fromEntries(formData.entries());
           tutorDetails.teachingMode = selected?.currentKey;
+          const { data, error } = await authClient.token();
+          if (error){
+              toast.error('Token Invalid Please Login Again');
+              return;
+          }
+          const {token} = data;
          const res = await fetch(`http://localhost:8080/my-tutors/${tutor?._id}`,
            { method:'PATCH',
             headers:{
-                'Content-type':'application/json'
+                'Content-type':'application/json',
+                 "Authorization": `Bearer ${token}`
             },
             body:JSON.stringify(tutorDetails)
            }

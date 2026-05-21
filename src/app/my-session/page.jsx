@@ -14,9 +14,20 @@ const MySessionPage = async() => {
         'use server';
         revalidatePath('/my-session');
     }
+    const {token }= await auth.api.getToken({
+          headers: await headers()
+    })
+    // console.log(token , "token");
     const id = session?.user?.id;
-    const res = await fetch(`http://localhost:8080/my-session/${id}`);
+    const res = await fetch(`http://localhost:8080/my-session/${id}`,
+        {
+            headers:{
+                "Authorization": `Bearer ${token}`
+            }
+        }
+    );
     const bookings = await res.json();
+
     if(!bookings.length){
          return <EmptyState className="flex h-full w-full flex-col items-center justify-center gap-4 my-20 text-center">
                 <Icon className="size-6 text-muted" icon="gravity-ui:tray" />
@@ -24,6 +35,7 @@ const MySessionPage = async() => {
                 <span className="text-muted">Please booked a session</span>
                </EmptyState>
     }
+
     return (
         <div className='w-11/12 mx-auto my-20'>
           <Table>

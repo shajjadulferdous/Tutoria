@@ -10,9 +10,9 @@ const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
      const { 
         data: session, 
-        isPending, //loading state
-        error, //error object
-        refetch //refetch the session
+        isPending, 
+        error,
+        refetch 
     } = authClient.useSession() 
     const user = session?.user;
     const links = <>

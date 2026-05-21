@@ -1,16 +1,25 @@
 'use client'
+import { authClient } from '@/lib/auth-client';
 import { AlertDialog, Button } from '@heroui/react';
 import React from 'react';
 import toast from 'react-hot-toast';
 
 
 const CancelAction = ({BookingId , revalidedPath}) => {
-    const handleSubmit = async()=>{        
+    
+    const handleSubmit = async()=>{ 
+         const { data, error } = await authClient.token();
+         const {token} = data;
+         if(error){
+             toast.error('Token Invalid , Please Login again');
+             return;
+         }     
          const res =  await fetch(`http://localhost:8080/my-session/${BookingId}`,
             {
                 method:'PATCH',
                 headers:{
-                    'Content-type':'application/json'
+                    'Content-type':'application/json',
+                    "Authorization": `Bearer ${token}`
                 },
                 body:JSON.stringify({status:'canceled'})
             }   

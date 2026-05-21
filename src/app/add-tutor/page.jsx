@@ -20,11 +20,18 @@ const AddTutorPage = () => {
         const tutorDetails = Object.fromEntries(formData.entries());
         tutorDetails.addedBy = user?.id;
         tutorDetails.teachingMode = selected?.currentKey;
+        const { data, error } = await authClient.token();
+        if (error){
+            toast.error('Token Invalid Please Login Again');
+            return;
+        }
+        const {token} = data;
         const res = await fetch(`http://localhost:8080/my-tutors`,
             {
                 method:'POST',
                 headers:{
-                    'Content-type':'application/json'
+                    'Content-type':'application/json',
+                     "Authorization": `Bearer ${token}`
                 },
                 body:JSON.stringify(tutorDetails)
             }

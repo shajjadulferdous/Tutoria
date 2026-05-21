@@ -19,8 +19,14 @@ const MyTutorPage = async() => {
     const session = await auth.api.getSession({
       headers: await headers()
     })
+
     const user = session?.user;
-    const myTutors = await getAddMyTutor(user?.id);
+    
+    const {token} = await auth.api.getToken({
+      headers: await headers()
+    })
+
+    const myTutors = await getAddMyTutor(user?.id ,token);
     if (myTutors.length == 0){
          return <div className='my-20 w-11/12 mx-auto flex flex-col justify-center items-center'>
                <h1 className="text-3xl font-bold text-gray-800"> No Data Found </h1>

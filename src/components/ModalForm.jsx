@@ -26,12 +26,18 @@ export function ModalForm({tutor}) {
        booking.userId = id;
        booking.status = 'active';
        booking.tutorId = tutor?._id;
-
+        const { data, error } = await authClient.token();
+        if (error){
+            toast.error('Token Invalid Please Login Again');
+            return;
+        }
+        const {token} = data;
        const res = await fetch(`http://localhost:8080/my-session`,
         {
           method:'POST',
           headers:{
-             'Content-type':'application/json'
+             'Content-type':'application/json',
+              "Authorization": `Bearer ${token}`
           },
           body:JSON.stringify(booking)
         }

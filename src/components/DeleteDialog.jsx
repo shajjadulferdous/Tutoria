@@ -1,4 +1,5 @@
 'use client'
+import { authClient } from '@/lib/auth-client';
 import { AlertDialog, Button } from '@heroui/react';
 import React from 'react';
 import toast from 'react-hot-toast';
@@ -6,10 +7,21 @@ import { FiEdit } from 'react-icons/fi';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 
 const DeleteDialog = ({id , name , handleRevalidate}) => {
+
     const handleSubmit = async()=>{
+        const { data, error } = await authClient.token();
+        if (error){
+            toast.error('Token Invalid Please Login Again');
+            return;
+        }
+        const {token} = data;
+
         const result = await fetch(`http://localhost:8080/my-tutors/${id}`,
             {
                 method:'DELETE',
+                headers:{
+                    "Authorization": `Bearer ${token}`
+                }
             }
         );
         const res =await result.json();

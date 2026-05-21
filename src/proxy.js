@@ -3,11 +3,9 @@ import { headers } from 'next/headers';
 import { NextResponse } from 'next/server'
  
 export async function proxy(request) {
-    // console.log(request);
     const session = await auth.api.getSession({
         headers: await headers()
     })
-    console.log("request")
     const user = session?.user;
      if (user){
         return NextResponse.next();
