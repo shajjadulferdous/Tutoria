@@ -5,7 +5,6 @@ import { Icon } from '@iconify-icon/react';
 import { revalidatePath } from 'next/cache';
 import { headers } from 'next/headers';
 import React from 'react';
-import { FiEdit } from 'react-icons/fi';
 
 const MySessionPage = async() => {
     const session = await auth.api.getSession({
@@ -19,9 +18,10 @@ const MySessionPage = async() => {
     const res = await fetch(`http://localhost:8080/my-session/${id}`);
     const bookings = await res.json();
     if(!bookings.length){
-         return <EmptyState className="flex h-full w-full flex-col items-center justify-center gap-4 text-center">
+         return <EmptyState className="flex h-full w-full flex-col items-center justify-center gap-4 my-20 text-center">
                 <Icon className="size-6 text-muted" icon="gravity-ui:tray" />
-                <span className="text-sm text-muted">No results found</span>
+                <span className="text-lg text-muted">No results found</span>
+                <span className="text-muted">Please booked a session</span>
                </EmptyState>
     }
     return (

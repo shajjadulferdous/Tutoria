@@ -3,7 +3,7 @@
 import { authClient } from "@/lib/auth-client";
 import {Envelope} from "@gravity-ui/icons";
 import {Button, Input, Label, Modal, Surface, TextField} from "@heroui/react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 
 export function ModalForm({tutor}) {
@@ -15,10 +15,18 @@ export function ModalForm({tutor}) {
         refetch //refetch the session
     } = authClient.useSession() 
   const id = session?.user?.id;
+  const today = new Date();
+  const dbDate = new Date(booking.sessionStartDate);
+  if (dbDate < today) {
+       toast.error("This session is expired");
+  }
   const handleSubmit = async(formData)=>{
+       
        const booking = Object.fromEntries(formData.entries());
        booking.userId = id;
        booking.status = 'active';
+       booking.tutorId = tutor?._id;
+
        const res = await fetch(`http://localhost:8080/my-session`,
         {
           method:'POST',
@@ -36,7 +44,7 @@ export function ModalForm({tutor}) {
   }
   return (
     <Modal>
-      <Button isDisabled={tutor?.totalSlot <= 0} className={'bg-[#35858E] w-full'} >Book Now</Button>
+      <Button isDisabled={tutor?.totalSlot <= 0 || dbDate <today} className={'bg-[#35858E] w-full'} >{tutor?.totalSlot > 0 ?'Book Now' : 'No slot avaiable now'}</Button>
       <Modal.Backdrop>
         <Modal.Container placement="auto">
           <Modal.Dialog className="sm:max-w-md">
@@ -59,7 +67,7 @@ export function ModalForm({tutor}) {
                   </TextField>
                   <TextField className="w-full" name="email" type="email" variant="secondary">
                     <Label>Student Email</Label>
-                    <Input value={'sha@gmail.com'} required />
+                    <Input value={session?.user?.email} required />
                   </TextField>
                   <TextField className="w-full" name="phone" type="tel" variant="secondary">
                     <Label>Phone</Label>

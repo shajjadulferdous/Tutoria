@@ -2,7 +2,7 @@
 import { AlertDialog, Button } from '@heroui/react';
 import React from 'react';
 import toast from 'react-hot-toast';
-import { FiEdit } from 'react-icons/fi';
+
 
 const CancelAction = ({BookingId , revalidedPath}) => {
     const handleSubmit = async()=>{        
