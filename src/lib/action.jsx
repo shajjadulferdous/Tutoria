@@ -8,3 +8,8 @@ export const getDetailsTutor = async (id)=>{
    const ans = await res.json();
    return ans;
 }
+export const getAddMyTutor = async(id)=>{
+    const res = await fetch(`http://localhost:8080/my-tutors/${id}`);
+    const ans = await res.json();
+    return ans;
+}

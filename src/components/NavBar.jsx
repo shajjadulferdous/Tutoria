@@ -32,7 +32,7 @@ const NavBar = () => {
             <Link href="/my-tutor">My Tutors</Link>
           </li>
           <li>
-            <Link href="#">My Sessions</Link>
+            <Link href="/my-session">My Sessions</Link>
           </li>
 
     </>

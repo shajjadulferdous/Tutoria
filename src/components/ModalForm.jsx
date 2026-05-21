@@ -4,9 +4,13 @@ import {Envelope} from "@gravity-ui/icons";
 import {Button, Input, Label, Modal, Surface, TextField} from "@heroui/react";
 
 export function ModalForm({tutor}) {
+  const handleSubmit = async(formData)=>{
+       const booking = Object.fromEntries(formData.entries());
+       console.log(booking);
+  }
   return (
     <Modal>
-      <Button className={'bg-[#35858E] w-full'} >Book Now</Button>
+      <Button isDisabled={tutor?.totalSlot <= 0} className={'bg-[#35858E] w-full'} >Book Now</Button>
       <Modal.Backdrop>
         <Modal.Container placement="auto">
           <Modal.Dialog className="sm:max-w-md">
@@ -22,7 +26,7 @@ export function ModalForm({tutor}) {
             </Modal.Header>
             <Modal.Body className="p-6">
               <Surface variant="default">
-                <form className="flex flex-col gap-4">
+                <form action={handleSubmit} className="flex flex-col gap-4">
                   <TextField className="w-full" name="name" type="text" variant="secondary">
                     <Label>Student Name</Label>
                     <Input placeholder="Enter your name" required />
@@ -43,7 +47,7 @@ export function ModalForm({tutor}) {
                     <Button slot="close" variant="secondary">
                         Cancel
                     </Button>
-                    <Button slot={'close'} className={'bg-[#35858E] w-full'} >Confirm Assignment</Button>
+                    <Button slot={'close'} type="submit" className={'bg-[#35858E] w-full'} >Confirm Assignment</Button>
                  </Modal.Footer>
                 </form>
               </Surface>

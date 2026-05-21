@@ -1,6 +1,7 @@
 'use client'
 import { authClient } from '@/lib/auth-client';
 import { Button, Dropdown, Header, Label } from '@heroui/react';
+import { redirect } from 'next/navigation';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { CiLocationOn } from 'react-icons/ci';
@@ -32,6 +33,7 @@ const AddTutorPage = () => {
             toast.error('Something went wrong');
             return;
         }
+        redirect('/my-tutor');
     }
     return (
         
