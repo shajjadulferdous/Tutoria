@@ -1,0 +1,21 @@
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+import { NextResponse } from 'next/server'
+ 
+export async function proxy(request) {
+    // console.log(request);
+    const session = await auth.api.getSession({
+        headers: await headers()
+    })
+    console.log("request")
+    const user = session?.user;
+     if (user){
+        return NextResponse.next();
+     }
+     return NextResponse.redirect(new URL('/login', request.url))
+}
+
+export const config = {
+  matcher: ['/add-tutor' , '/my-tutor' , '/my-session' , '/tutors/:path' , '/my-profile']
+}
+

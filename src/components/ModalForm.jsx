@@ -16,7 +16,7 @@ export function ModalForm({tutor}) {
     } = authClient.useSession() 
   const id = session?.user?.id;
   const today = new Date();
-  const dbDate = new Date(booking.sessionStartDate);
+  const dbDate = new Date(tutor.sessionStartDate);
   if (dbDate < today) {
        toast.error("This session is expired");
   }
