@@ -10,6 +10,7 @@ import { MdCalendarMonth, MdVerifiedUser } from 'react-icons/md';
 import { ModalForm } from '@/components/ModalForm';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
+import NotFound from '@/app/not-found';
 
 const TutorDetailsPage = async ({ params }) => {
   const { id } = await params;
@@ -17,6 +18,9 @@ const TutorDetailsPage = async ({ params }) => {
       headers: await headers()
   })
   const details = await getDetailsTutor(id , token);
+  if (!details){
+      return <NotFound></NotFound>;
+  }
   return (
      <>
        <div className='w-11/12 mx-auto my-20'>

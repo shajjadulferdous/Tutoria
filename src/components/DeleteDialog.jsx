@@ -3,7 +3,6 @@ import { authClient } from '@/lib/auth-client';
 import { AlertDialog, Button } from '@heroui/react';
 import React from 'react';
 import toast from 'react-hot-toast';
-import { FiEdit } from 'react-icons/fi';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 
 const DeleteDialog = ({id , name , handleRevalidate}) => {

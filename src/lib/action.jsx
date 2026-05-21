@@ -9,6 +9,7 @@ export const getDetailsTutor = async (id , token)=>{
       "Authorization": `Bearer ${token}`
     }
    });
+   if (!res.ok) return null;
    const ans = await res.json();
    return ans;
 }
@@ -18,6 +19,7 @@ export const getAddMyTutor = async(id, token)=>{
             "Authorization": `Bearer ${token}`
           } 
     });
+    if (!res.ok) return null;
     const ans = await res.json();
     return ans;
 }

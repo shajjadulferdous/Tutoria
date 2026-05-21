@@ -1,13 +1,14 @@
 'use client'
 import { authClient } from '@/lib/auth-client';
-import { Avatar, Button, Dropdown, Label } from '@heroui/react';
+import { Avatar, Button, Dropdown, Label, Spinner } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const router = useRouter();
      const { 
         data: session, 
         isPending, 
@@ -87,7 +88,8 @@ const NavBar = () => {
         </ul>
         
         <div className="hidden items-center gap-4 md:flex">
-          {user?  <Dropdown>
+          {user?  
+          isPending ? <Spinner size="xl" /> : <Dropdown>
         <Button aria-label="Menu" variant="ghost" size="icon" className="p-0 rounded-full">
           <Avatar>
           <Avatar.Image alt={user?.name} src={user?.image} />
@@ -100,13 +102,14 @@ const NavBar = () => {
             <Link href={'/my-profile'}>Profile</Link>
           </Dropdown.Item>
           <Dropdown.Item id="copy-link">
-            <button onClick={async()=>{await authClient.signOut(); redirect('/')}}>Logout</button>
+            <button onClick={async()=>{await authClient.signOut(); router.push('/')}}>Logout</button>
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown.Popover>
-    </Dropdown>:
+        </Dropdown>
+    :
           <><Link className='text-black' href="/login">Login</Link>
-          <Button variant='ghost'>Sign Up</Button></>}
+          <Button onClick={()=>router.push('/register')} variant='ghost'>Sign Up</Button></>}
         </div>
       </header>
       {isMenuOpen && (

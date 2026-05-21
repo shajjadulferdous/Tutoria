@@ -43,19 +43,44 @@ const LoginPage = () => {
      }
 
     return (
-        <div className='h-screen flex justify-center items-center flex-col'>
-             <div>
-                <Image src={`/assests/tutoria.png`} alt="logo" width={180} height={180} className='grayscale-100'></Image>
-             </div>
-            <h1 className='font-semibold text-xl text-gray-600'>Sign in to Tutoria</h1>
-            <div>
+        <div className='flex justify-between'>
+            <div className="w-full  bg-white md:shadow-xl md:border md:border-gray-100 flex overflow-hidden min-h-[80vh]">
+                
+                <div className="hidden md:flex flex-1 bg-[#35858E] p-12 flex-col justify-between relative overflow-hidden">
+
+                    <div className="absolute -top-10 -left-10 w-40 h-40 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+                    <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-black/10 rounded-full blur-3xl pointer-events-none" />
+
+                    <div className="text-white text-3xl font-black tracking-wider z-10 select-none">
+                        Tutoria.
+                    </div>
+                    
+                    <div className="max-w-md z-10">
+                        <Icon icon="fa6-solid:quote-left" className="text-white/20 text-5xl mb-4" />
+                        <p className="text-2xl text-white font-medium leading-relaxed tracking-wide">
+                            Education is the most powerful weapon which you can use to change the world.
+                        </p>
+                        <div className="h-1 w-12 bg-white/40 mt-6 rounded" />
+                    </div>
+
+                    <div className="text-white/60 text-sm z-10">
+                        © 2026 Tutoria Inc. All rights reserved.
+                    </div>
+                </div>
+                 
+                    
+               <div className='flex-1 '>
+                 <div className='w-11/12 p-12 mx-auto'>
+                <h1 className='font-semibold text-xl text-center text-gray-600'>Welcome Back</h1>
+                <p className='text-gray-600 text-sm text-center'>Sign in to continue your learning journey.</p>
+                 <div>
                 <form onSubmit={handleSubmit(handleLogin , handleError)}>
-                <fieldset className="fieldset rounded-box w-85 sm:w-100  p-4">
+                <fieldset className="fieldset rounded-box   p-4">
                 <label className="label text-gray-600 font-semibold text-[16px]">Email</label>
-                <input type="email" {...register('email', { required: true })} className="input outline-none w-85 sm:w-100  hover:border-[#35858E] hover:border-2" placeholder="Email" />
+                <input type="email" {...register('email', { required: true })} className="input outline-none w-full rounded-full  hover:border-[#35858E] hover:border-2" placeholder="Email" />
 
                 <label className="label text-gray-600 font-semibold text-[16px]">Password</label>
-                <input type="password" {...register('password', { required: true })} className="input outline-none w-85 sm:w-100  hover:border-[#35858E] hover:border-2" placeholder="Password" />
+                <input type="password" {...register('password', { required: true })} className="input outline-none w-full rounded-full hover:border-[#35858E] hover:border-2" placeholder="Password" />
 
                 <Button type='submit' className="w-full bg-[#35858E] text-white mt-4">Sign in</Button>
                 </fieldset>
@@ -69,7 +94,12 @@ const LoginPage = () => {
                       </Button>
                 </div>
                 <p className='text-center mt-4'>New to Tutoria ? <Link href={'/register'} className='text-blue-500'>Create an Account</Link></p>
-            </div>
+                </div>
+                 </div>
+               </div>
+
+                </div>
+
         </div>
     );
 };
