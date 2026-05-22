@@ -70,7 +70,7 @@ const LoginPage = () => {
                  
                     
                <div className='flex-1 '>
-                 <div className='w-11/12 md:p-12 mx-auto'>
+                 <div className='w-11/12 pt-12 md:pt-0  md:p-12 mx-auto'>
                 <h1 className='font-semibold text-xl text-center text-gray-600'>Welcome Back</h1>
                 <p className='text-gray-600 text-sm text-center'>Sign Up to continue your learning journey.</p>
                  <div>

@@ -42,7 +42,7 @@ const MyTutorPage = async() => {
     }
     return (
         <>
-          <div className="text-center mb-8">
+          <div className="text-center my-8">
                  <div className="inline-flex items-center gap-2 bg-[#35858E]/10 text-[#35858E] text-xs font-bold rounded-full px-4 py-1.5 mb-3">
                    <FaGraduationCap /> DashBoard
                  </div>
