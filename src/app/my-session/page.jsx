@@ -6,6 +6,11 @@ import { revalidatePath } from 'next/cache';
 import { headers } from 'next/headers';
 import React from 'react';
 
+export const metadata = {
+  title: 'tutoria | My session Page',
+  description: 'this is booked Session Page',
+}
+
 const MySessionPage = async() => {
     const session = await auth.api.getSession({
           headers: await headers()

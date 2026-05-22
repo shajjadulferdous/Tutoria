@@ -10,6 +10,10 @@ import React from 'react';
 import { FaBriefcase, FaGraduationCap } from 'react-icons/fa';
 import { MdVerifiedUser } from 'react-icons/md';
 
+export const metadata = {
+  title: 'tutoria | My added Page',
+  description: 'this is Added Tutor Page , where will show the added Tutor By You',
+}
 
 const MyTutorPage = async() => {
     const handleRevalidate = async()=>{

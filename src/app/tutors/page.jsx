@@ -1,15 +1,17 @@
 "use client";
 
 import TutorCard from "@/components/TutorCard";
+import { Spinner } from "@heroui/react";
 import React, { useEffect, useState } from "react";
 
 const TutorPage = () => {
   const [tutors, setTutors] = useState([]);
   const [search, setSearch] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
-
+  const [isLoading , setisLoading] = useState(false);
     useEffect(() => {
         const getTutors = async () => {
+        setisLoading(true);
         try {
             const query = new URLSearchParams();
             if (search) {
@@ -30,6 +32,10 @@ const TutorPage = () => {
         } catch (error) {
             console.error("Error fetching tutors:", error);
         }
+        finally{
+            setisLoading(false);
+        }
+
         };
         getTutors();
     }, [search, selectedDate]);
@@ -46,7 +52,7 @@ const TutorPage = () => {
 
         <h1 className="text-4xl md:text-5xl font-bold text-slate-900">
           Discover Your{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#35858E] to-cyan-600">
+          <span className="text-transparent bg-clip-text bg-linear-to-r from-[#35858E] to-cyan-600">
             Perfect Tutor
           </span>
         </h1>
@@ -75,10 +81,10 @@ const TutorPage = () => {
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        isLoading ? <div className="flex h-[60vh] items-center justify-center"> <Spinner className="text-[#35858E]" size="xl" /></div> :<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {tutors.length > 0 ? (
-          tutors.map((tutor) => (
-           
+          tutors.map((tutor) => (      
             <TutorCard key={tutor._id} tutor={tutor} />
           ))
         ) : (
@@ -92,6 +98,7 @@ const TutorPage = () => {
           </div>
         )}
       </div>
+      }
     </div>
   );
 };

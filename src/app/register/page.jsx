@@ -1,6 +1,5 @@
 'use client'
 import React from 'react';
-import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { authClient } from '@/lib/auth-client';
 import { redirect } from 'next/navigation';
@@ -8,6 +7,7 @@ import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { Button } from '@heroui/react';
 import { Icon } from '@iconify-icon/react';
+
 const RegisterPage = () => {
     const { register, handleSubmit, formState: { errors },} = useForm();
     const handleRegister= async (e)=>{
@@ -75,7 +75,7 @@ const RegisterPage = () => {
                          
                             
                        <div className='flex-1 '>
-                         <div className='w-11/12 p-12 mx-auto'>
+                         <div className='w-11/12 md:p-12 mx-auto'>
                         <h1 className='font-semibold text-xl text-center text-gray-600'>Welcome Back</h1>
                         <p className='text-gray-600 text-sm text-center'>Sign in to continue your learning journey.</p>
                           <div>

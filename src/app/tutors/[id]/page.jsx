@@ -1,3 +1,9 @@
+
+export const metadata = {
+  title: 'tutoria | teacher details page',
+  description: 'this is a teacher details Page',
+}
+
 import { getDetailsTutor } from '@/lib/action';
 import Image from 'next/image';
 import React from 'react';
@@ -11,6 +17,7 @@ import { ModalForm } from '@/components/ModalForm';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import NotFound from '@/app/not-found';
+
 
 const TutorDetailsPage = async ({ params }) => {
   const { id } = await params;
