@@ -72,7 +72,7 @@ const LoginPage = () => {
                <div className='flex-1 '>
                  <div className='w-11/12 p-12 mx-auto'>
                 <h1 className='font-semibold text-xl text-center text-gray-600'>Welcome Back</h1>
-                <p className='text-gray-600 text-sm text-center'>Sign in to continue your learning journey.</p>
+                <p className='text-gray-600 text-sm text-center'>Sign Up to continue your learning journey.</p>
                  <div>
                 <form onSubmit={handleSubmit(handleLogin , handleError)}>
                 <fieldset className="fieldset rounded-box   p-4">

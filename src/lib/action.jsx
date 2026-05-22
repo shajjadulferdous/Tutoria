@@ -1,10 +1,14 @@
 export const getTutors = async (limit = 0) => {
-  const res = await fetch(`http://localhost:8080/tutors?limit=${limit}`,);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tutors?limit=${limit}`,
+    {
+      cache: 'no-store'
+    }
+  );
   return await res.json();
 };
 
 export const getDetailsTutor = async (id , token)=>{
-   const res = await fetch(`http://localhost:8080/tutors/${id}`,{
+   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tutors/${id}`,{
       headers:{
       "Authorization": `Bearer ${token}`
     }
@@ -14,7 +18,7 @@ export const getDetailsTutor = async (id , token)=>{
    return ans;
 }
 export const getAddMyTutor = async(id, token)=>{
-    const res = await fetch(`http://localhost:8080/my-tutors/${id}`,{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-tutors/${id}`,{
            headers:{
             "Authorization": `Bearer ${token}`
           } 

@@ -17,9 +17,8 @@ const MySessionPage = async() => {
     const {token }= await auth.api.getToken({
           headers: await headers()
     })
-    // console.log(token , "token");
     const id = session?.user?.id;
-    const res = await fetch(`http://localhost:8080/my-session/${id}`,
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-session/${id}`,
         {
             headers:{
                 "Authorization": `Bearer ${token}`
@@ -78,7 +77,7 @@ const MySessionPage = async() => {
                     </Table.Cell>
                      <Table.Cell>{booking.email}</Table.Cell>
                      <Table.Cell>
-                        <CancelAction BookingId={booking?._id} revalidedPath={revalidedPath}></CancelAction>
+                        <CancelAction BookingId={booking?._id} tutorId={booking?.tutorId} revalidedPath={revalidedPath}></CancelAction>
                      </Table.Cell>
                     </Table.Row>
                   )

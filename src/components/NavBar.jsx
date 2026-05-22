@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { redirect, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import NavLink from './NavLink';
 
 const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,23 +20,23 @@ const NavBar = () => {
     const links = <>
       
           <li >
-            <Link className='' href="/">Home</Link>
+            <NavLink href="/">Home</NavLink>
           </li>
           <li>
-            <Link href="/tutors"  aria-current="page">
+            <NavLink href={'/tutors'} >
               Tutors
-            </Link>
+            </NavLink>
           </li>
            {
              user && <>
                 <li>
-                <Link href="/add-tutor">Add Tutors</Link>
+                <NavLink href="/add-tutor">Add Tutors</NavLink>
               </li>
               <li>
-                <Link href="/my-tutor">My Tutors</Link>
+                <NavLink href="/my-tutor">My Tutors</NavLink>
               </li>
               <li>
-                <Link href="/my-session">My Sessions</Link>
+                <NavLink href="/my-session">My Sessions</NavLink>
               </li>
              </>
            }
@@ -89,7 +90,9 @@ const NavBar = () => {
         
         <div className="hidden items-center gap-4 md:flex">
           {user?  
-          isPending ? <Spinner size="xl" /> : <Dropdown>
+          isPending ? <div className='flex justify-center items-center'>
+              <Spinner size="xl" className='text-[#35858E]' />
+          </div> : <Dropdown>
         <Button aria-label="Menu" variant="ghost" size="icon" className="p-0 rounded-full">
           <Avatar>
           <Avatar.Image alt={user?.name} src={user?.image} />
@@ -99,7 +102,7 @@ const NavBar = () => {
       <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
           <Dropdown.Item id="new-file" >
-            <Link href={'/my-profile'}>Profile</Link>
+            <NavLink href={'/my-profile'}>Profile</NavLink>
           </Dropdown.Item>
           <Dropdown.Item id="copy-link">
             <button onClick={async()=>{await authClient.signOut(); router.push('/')}}>Logout</button>
@@ -108,7 +111,7 @@ const NavBar = () => {
       </Dropdown.Popover>
         </Dropdown>
     :
-          <><Link className='text-black' href="/login">Login</Link>
+          <><NavLink  href="/login">Login</NavLink>
           <Button onClick={()=>router.push('/register')} variant='ghost'>Sign Up</Button></>}
         </div>
       </header>
@@ -117,11 +120,17 @@ const NavBar = () => {
           <ul className="flex flex-col gap-2 p-4">
              {links}
             <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
-              <Link href="/login" className="block py-2">
-                Login
-              </Link>
-              <Button className="w-full">Sign Up</Button>
+              {!user?<>
+                 <NavLink href="/login" className="block py-2">
+                   Login
+                </NavLink>
+                 <Button className="w-full">Sign Up</Button>
+              </> :<>
+                  <NavLink href={'/my-profile'}>Profile</NavLink>
+                  <button onClick={async()=>{await authClient.signOut(); router.push('/')}}>Logout</button>
+              </>}
             </li>
+
           </ul>
         </div>
       )}

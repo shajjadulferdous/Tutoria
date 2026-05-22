@@ -6,7 +6,7 @@ const page = async() => {
     const tutors = await getTutors(0);
     
     return (
-        <div className='grid grid-cols-3 gap-5 w-11/12 mx-auto my-10'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-11/12 mx-auto my-10'>
                  {
                     tutors.map((tutor, index )=>  <TutorCard key={index} tutor={tutor}></TutorCard>)
                  }

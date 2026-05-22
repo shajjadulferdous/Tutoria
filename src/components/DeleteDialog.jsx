@@ -15,7 +15,7 @@ const DeleteDialog = ({id , name , handleRevalidate}) => {
         }
         const {token} = data;
 
-        const result = await fetch(`http://localhost:8080/my-tutors/${id}`,
+        const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-tutors/${id}`,
             {
                 method:'DELETE',
                 headers:{

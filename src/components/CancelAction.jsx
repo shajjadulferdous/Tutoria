@@ -5,7 +5,7 @@ import React from 'react';
 import toast from 'react-hot-toast';
 
 
-const CancelAction = ({BookingId , revalidedPath}) => {
+const CancelAction = ({BookingId , revalidedPath , tutorId}) => {
     
     const handleSubmit = async()=>{ 
          const { data, error } = await authClient.token();
@@ -14,14 +14,14 @@ const CancelAction = ({BookingId , revalidedPath}) => {
              toast.error('Token Invalid , Please Login again');
              return;
          }     
-         const res =  await fetch(`http://localhost:8080/my-session/${BookingId}`,
+         const res =  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-session/${BookingId}`,
             {
                 method:'PATCH',
                 headers:{
                     'Content-type':'application/json',
                     "Authorization": `Bearer ${token}`
                 },
-                body:JSON.stringify({status:'canceled'})
+                body:JSON.stringify({status:'canceled' , tutorId})
             }   
          )
          if(!res.ok){

@@ -26,7 +26,7 @@ const AddTutorPage = () => {
             return;
         }
         const {token} = data;
-        const res = await fetch(`http://localhost:8080/my-tutors`,
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-tutors`,
             {
                 method:'POST',
                 headers:{
@@ -125,7 +125,7 @@ const AddTutorPage = () => {
                 </div>
                 <div className='flex flex-col'>
                      <label className="font-bold">Area</label>
-                     <input type="text" name='location' className="input w-full outline-none hover:border-[#35858E]" placeholder="e.g Mathmatics" />
+                     <input type="text" name='location' className="input w-full outline-none hover:border-[#35858E]" placeholder="e.g Dhaka" />
                  </div>
                   <div className='flex flex-col gap-2'>
                   <label className="font-bold">Teaching Mode</label>

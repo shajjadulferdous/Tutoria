@@ -17,7 +17,7 @@ const EditCard = ({tutor , handleRevalidate}) => {
               return;
           }
           const {token} = data;
-         const res = await fetch(`http://localhost:8080/my-tutors/${tutor?._id}`,
+         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-tutors/${tutor?._id}`,
            { method:'PATCH',
             headers:{
                 'Content-type':'application/json',

@@ -4,21 +4,23 @@ import { authClient } from "@/lib/auth-client";
 import {Envelope} from "@gravity-ui/icons";
 import {Button, Input, Label, Modal, Surface, TextField} from "@heroui/react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 
 export function ModalForm({tutor}) {
    const router = useRouter();
    const { 
         data: session, 
-        isPending, //loading state
-        error, //error object
-        refetch //refetch the session
+        isPending, 
+        error, 
+        refetch 
     } = authClient.useSession() 
   const id = session?.user?.id;
   const today = new Date();
   const dbDate = new Date(tutor.sessionStartDate);
   if (dbDate < today) {
        toast.error("This session is expired");
+       return;
   }
   const handleSubmit = async(formData)=>{
        
@@ -31,8 +33,8 @@ export function ModalForm({tutor}) {
             toast.error('Token Invalid Please Login Again');
             return;
         }
-        const {token} = data;
-       const res = await fetch(`http://localhost:8080/my-session`,
+       const {token} = data;
+       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-session`,
         {
           method:'POST',
           headers:{
