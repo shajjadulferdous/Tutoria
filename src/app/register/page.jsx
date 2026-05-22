@@ -89,14 +89,18 @@ const RegisterPage = () => {
                 <input type="text" {...register('name', { required: true })} className="input outline-none w-full rounded-full  hover:border-[#35858E] hover:border-2" placeholder="Your Name" />
                  
                 <label className="label text-gray-600 font-semibold text-[16px]">Photo</label>
-                <input type="text" {...register('image', { required: true })} className="input outline-none w-full rounded-full hover:border-[#35858E] hover:border-2" placeholder="URL" />
+                <input type="url" {...register('image', { required: true })} 
+                pattern="^(https?://)?([a-zA-Z0-9]([a-zA-Z0-9-].*[a-zA-Z0-9])?.)+[a-zA-Z].*$"
+                 title="Must be valid URL" 
+                 className="input validator outline-none w-full rounded-full hover:border-[#35858E] hover:border-2" placeholder="https://" />
+                <p className="validator-hint hidden">Must be valid URL</p>
 
                 <label className="label text-gray-600 font-semibold text-[16px]">Password</label>
                 <input type="password" {...register('password', { required: true })}
                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                   minLength="6" 
                   title="Must be more than 8 characters, including number, lowercase letter, uppercase letter" 
-                 className="input validator outline-none rounded-full  w-full hover:border-[#35858E] hover:border-2" placeholder="Password" />
+                  className="input validator outline-none rounded-full  w-full hover:border-[#35858E] hover:border-2" placeholder="Password" />
                  <p className="validator-hint hidden">
                  Must be more than 6 characters, including
                 <br/>At least one number
