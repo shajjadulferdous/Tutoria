@@ -4,7 +4,7 @@ import TutorCard from './TutorCard';
 import Link from 'next/link';
 
 const OurInstractor = async() => {
-    const tutors = await getTutors(5);
+    const tutors = await getTutors(6);
 
     return (
         <div className=''>
