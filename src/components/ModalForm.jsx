@@ -18,10 +18,7 @@ export function ModalForm({tutor}) {
   const id = session?.user?.id;
   const today = new Date();
   const dbDate = new Date(tutor.sessionStartDate);
-  if (dbDate < today) {
-       toast.error("This session is expired");
-       return;
-  }
+  
   const handleSubmit = async(formData)=>{
        
        const booking = Object.fromEntries(formData.entries());
@@ -52,7 +49,14 @@ export function ModalForm({tutor}) {
   }
   return (
     <Modal>
-      <Button isDisabled={tutor?.totalSlot <= 0 || dbDate <today} className={'bg-[#35858E] w-full'} >{tutor?.totalSlot > 0 ?'Book Now' : 'No slot avaiable now'}</Button>
+    <Button
+      isDisabled={tutor?.totalSlot <= 0 || dbDate < today}
+      className="bg-[#35858E] w-full"
+    >
+      {tutor?.totalSlot > 0 && dbDate >= today
+        ? "Book Now"
+        : tutor?.totalSlot <= 0 ? "No Slot Avaiable":'Session Date Expired'}
+    </Button>
       <Modal.Backdrop>
         <Modal.Container placement="auto">
           <Modal.Dialog className="sm:max-w-md">

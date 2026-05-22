@@ -80,8 +80,16 @@ const LoginPage = () => {
                 <input type="email" {...register('email', { required: true })} className="input outline-none w-full rounded-full  hover:border-[#35858E] hover:border-2" placeholder="Email" />
 
                 <label className="label text-gray-600 font-semibold text-[16px]">Password</label>
-                <input type="password" {...register('password', { required: true })} className="input outline-none w-full rounded-full hover:border-[#35858E] hover:border-2" placeholder="Password" />
-
+                <input type="password" {...register('password', { required: true })}
+                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                 title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
+                 className="input validator outline-none w-full rounded-full hover:border-[#35858E] hover:border-2" minLength="6"  placeholder="Password" />
+                 <p className="validator-hint hidden">
+                 Must be more than 6 characters, including
+                <br/>At least one number
+                <br/>At least one lowercase letter
+                <br/>At least one uppercase letter
+                </p>
                 <Button type='submit' className="w-full bg-[#35858E] text-white mt-4">Sign in</Button>
                 </fieldset>
                 </form>

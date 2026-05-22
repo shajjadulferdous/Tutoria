@@ -102,17 +102,17 @@ const NavBar = () => {
       <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
           <Dropdown.Item id="new-file" >
-            <NavLink href={'/my-profile'}>Profile</NavLink>
+            <Link variant='ghost' href={'/my-profile'}>Profile</Link>
           </Dropdown.Item>
           <Dropdown.Item id="copy-link">
-            <button onClick={async()=>{await authClient.signOut(); router.push('/')}}>Logout</button>
+            <button variant='ghost' onClick={async()=>{await authClient.signOut(); router.push('/')}}>Logout</button>
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown.Popover>
         </Dropdown>
     :
           <><NavLink  href="/login">Login</NavLink>
-          <Button onClick={()=>router.push('/register')} variant='ghost'>Sign Up</Button></>}
+           <NavLink href={'/register'}>Register</NavLink></>}
         </div>
       </header>
       {isMenuOpen && (
@@ -126,7 +126,7 @@ const NavBar = () => {
                 </NavLink>
                  <Button className="w-full">Sign Up</Button>
               </> :<>
-                  <NavLink href={'/my-profile'}>Profile</NavLink>
+                  <Link variant='ghost' href={'/my-profile'}>Profile</Link>
                   <button onClick={async()=>{await authClient.signOut(); router.push('/')}}>Logout</button>
               </>}
             </li>
