@@ -124,7 +124,8 @@ const NavBar = () => {
                  <NavLink href="/login" className="block py-2">
                    Login
                 </NavLink>
-                 <Button className="w-full">Sign Up</Button>
+                 {/* <Button className="w-full">Sign Up</Button> */}
+                 <NavLink href={'/register'}>Sign Up</NavLink>
               </> :<>
                   <Link variant='ghost' href={'/my-profile'}>Profile</Link>
                   <button onClick={async()=>{await authClient.signOut(); router.push('/')}}>Logout</button>

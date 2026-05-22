@@ -5,6 +5,7 @@ import { Icon } from '@iconify-icon/react';
 import { revalidatePath } from 'next/cache';
 import { headers } from 'next/headers';
 import React from 'react';
+import { FaGraduationCap } from 'react-icons/fa';
 
 export const metadata = {
   title: 'tutoria | My session Page',
@@ -42,6 +43,17 @@ const MySessionPage = async() => {
 
     return (
         <div className='w-11/12 mx-auto my-20'>
+         <div className="text-center mb-8">
+        <div className="inline-flex items-center gap-2 bg-[#35858E]/10 text-[#35858E] text-xs font-bold rounded-full px-4 py-1.5 mb-3">
+          <FaGraduationCap /> Student Dashboard
+        </div>
+        <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+          See your sessions which you booked
+        </h2>
+        <p className="text-sm text-slate-500 mt-2">
+          Track your live class approvals, schedules, and join ongoing sessions instantly.
+        </p>
+      </div>
           <Table>
             <Table.ResizableContainer>
                 <Table.Content aria-label="Table with resizable columns" className="min-w-[700px]">

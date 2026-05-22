@@ -41,7 +41,19 @@ const MyTutorPage = async() => {
          </div>
     }
     return (
-        <div>
+        <>
+          <div className="text-center mb-8">
+                 <div className="inline-flex items-center gap-2 bg-[#35858E]/10 text-[#35858E] text-xs font-bold rounded-full px-4 py-1.5 mb-3">
+                   <FaGraduationCap /> DashBoard
+                 </div>
+                 <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+                   See your sessions which you Made 
+                 </h2>
+                 <p className="text-sm text-slate-500 mt-2">
+                   Track your session you created
+                 </p>
+               </div>
+                <div>
             {
                 myTutors.map((tutor , index) => <div key={index} className='bg-white p-10 shadow-sm flex flex-col sm:flex-row justify-between'>
                      <div  className='flex gap-5  rounded-2xl flex-col sm:flex-row sm:justify-start justify-center'>
@@ -64,6 +76,8 @@ const MyTutorPage = async() => {
                 </div>)
             }
         </div>
+        </>
+       
     );
 };
 
