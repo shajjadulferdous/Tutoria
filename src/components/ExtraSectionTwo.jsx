@@ -27,7 +27,7 @@ const steps = [
 ];
 const ExtraSectionTwo = () => {
     return (
-        <div className='my-20'>
+        <div id='how-it-work' className='my-20'>
             <h1 className='text-5xl font-bold text-center w-11/12 mx-auto'>
                 Master New Skills on <br/> <span className='text-[#7DA78C]'>on your schedule</span> 
             </h1>

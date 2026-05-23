@@ -4,6 +4,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import Link from 'next/link';
 
 const Banner = () => {
     const bgImage = [
@@ -62,13 +63,13 @@ const Banner = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-                        <button className="w-full sm:w-auto px-8 py-4 bg-[#E6EEC9] text-[#35858E] font-bold rounded-lg shadow-lg hover:bg-[#7DA78C] hover:text-white transition-all duration-300 transform hover:-translate-y-0.5">
+                        <Link href='/tutors' className="w-full sm:w-auto px-8 py-4 bg-[#E6EEC9] text-[#35858E] font-bold rounded-lg shadow-lg hover:bg-[#7DA78C] hover:text-white transition-all duration-300 transform hover:-translate-y-0.5">
                             Find a Tutor
-                        </button>
+                        </Link>
 
-                        <button className="w-full sm:w-auto px-8 py-4 bg-transparent border-2 border-white/80 text-white font-semibold rounded-lg hover:bg-white/10 transition-all duration-300">
+                        <a href='#how-it-work' className="w-full sm:w-auto px-8 py-4 bg-transparent border-2 border-white/80 text-white font-semibold rounded-lg hover:bg-white/10 transition-all duration-300">
                             How it Works
-                        </button>
+                        </a>
                     </div>
 
                 </div>
