@@ -9,6 +9,7 @@ const TutorPage = () => {
   const [search, setSearch] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [isLoading , setisLoading] = useState(false);
+
     useEffect(() => {
         const getTutors = async () => {
         setisLoading(true);
@@ -21,11 +22,11 @@ const TutorPage = () => {
             query.append("startDate", selectedDate);
             }
             const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/tutoria?${query.toString()}`
+               `${process.env.NEXT_PUBLIC_API_URL}/tutoria?${query.toString()}`
             );
 
             if (!res.ok) {
-            throw new Error("Failed to fetch tutors");
+               throw new Error("Failed to fetch tutors");
             }
             const data = await res.json();
             setTutors(data);

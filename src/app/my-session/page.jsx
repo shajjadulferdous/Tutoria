@@ -56,7 +56,7 @@ const MySessionPage = async() => {
       </div>
           <Table>
             <Table.ResizableContainer>
-                <Table.Content aria-label="Table with resizable columns" className="min-w-[700px]">
+                <Table.Content aria-label="Table with resizable columns" className="min-w-175">
                 <Table.Header>
                     <Table.Column isRowHeader defaultWidth="1fr" id="name" minWidth={160}>
                      Student Name
@@ -94,7 +94,7 @@ const MySessionPage = async() => {
                     </Table.Cell>
                      <Table.Cell>{booking.email}</Table.Cell>
                      <Table.Cell>
-                        <CancelAction BookingId={booking?._id} tutorId={booking?.tutorId} revalidedPath={revalidedPath}></CancelAction>
+                        <CancelAction status={booking?.status} BookingId={booking?._id} tutorId={booking?.tutorId} revalidedPath={revalidedPath}></CancelAction>
                      </Table.Cell>
                     </Table.Row>
                   )

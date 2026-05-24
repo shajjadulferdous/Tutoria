@@ -2,7 +2,7 @@
 import { authClient } from '@/lib/auth-client';
 import { Button, Dropdown, Header, Label } from '@heroui/react';
 import { redirect } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useState, useTransition } from 'react';
 import toast from 'react-hot-toast';
 import { CiLocationOn } from 'react-icons/ci';
 import { MdPeopleOutline, MdSchedule, MdSubject } from 'react-icons/md';
@@ -10,15 +10,21 @@ import { MdPeopleOutline, MdSchedule, MdSubject } from 'react-icons/md';
 const AddTutorPage = () => {
     const { 
         data: session, 
-        isPending, //loading state
-        error, //error object
-        refetch //refetch the session
+        isPending:isSessionPending
     } = authClient.useSession();
     const user = session?.user;
+    
     const [selected, setSelected] = useState('');
+    const [isPending , startTransition] = useTransition();
     const handleSubmit = async(formData)=>{
+        if (!user || !user.id) {
+        toast.error('Session not loaded yet or user not logged in. Please wait or re-login.');
+        return;
+       }
+
+        startTransition(async()=>{
         const tutorDetails = Object.fromEntries(formData.entries());
-        tutorDetails.addedBy = user?.id;
+        tutorDetails.addedBy = user.id;
         tutorDetails.teachingMode = selected?.currentKey;
         const { data, error } = await authClient.token();
         if (error){
@@ -41,6 +47,7 @@ const AddTutorPage = () => {
             return;
         }
         redirect('/my-tutor');
+        });
     }
     return (
         
@@ -217,7 +224,7 @@ const AddTutorPage = () => {
                  </div>
                   <div className='flex flex-col'>
                      <label className="font-bold">Total Slots</label>
-                     <input type="text" name='totalSlot' required className="input w-full outline-none hover:border-[#35858E]" placeholder="e.g. 20" />
+                     <input type="number" name='totalSlot' required className="input w-full outline-none hover:border-[#35858E]" placeholder="e.g. 20" />
                      <p className='text-slate-600 text-sm'>Max number of students</p>
                  </div>
                  <div className='flex flex-col'>
@@ -227,7 +234,7 @@ const AddTutorPage = () => {
                  </div>
                 </div>
 
-                 <Button type='submit' className={`bg-[#35858E]  mt-4 w-full`}>Register Tutor</Button>
+                 <Button isDisabled={isPending || isSessionPending} type='submit' className={`bg-[#35858E]  mt-4 w-full`}> { isSessionPending ? 'Loading...':  isPending ? 'Registering...' : 'Register Tutor'}</Button>
              </form>
         </div>
     );

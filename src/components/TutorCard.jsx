@@ -42,7 +42,7 @@ const TutorCard = ({tutor}) => {
                     </div>
 
                    <Link href={`/tutors/${tutor._id}`}>
-                      <Button className={'bg-[#35858E] w-full'}>Book Now</Button>
+                      <Button  className={'bg-[#35858E] w-full'}>Book Now</Button>
                    </Link>
                 </div>
         </div>

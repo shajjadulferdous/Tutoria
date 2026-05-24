@@ -1,13 +1,14 @@
 'use client'
 import { authClient } from '@/lib/auth-client';
 import { AlertDialog, Button } from '@heroui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
 
-const CancelAction = ({BookingId , revalidedPath , tutorId}) => {
-    
+const CancelAction = ({BookingId , revalidedPath , tutorId , status}) => {
+    const [isPending, setIsPending] = useState(false);
     const handleSubmit = async()=>{ 
+         setIsPending(true); 
          const { data, error } = await authClient.token();
          const {token} = data;
          if(error){
@@ -26,14 +27,18 @@ const CancelAction = ({BookingId , revalidedPath , tutorId}) => {
          )
          if(!res.ok){
                toast.error('something went wrong');
+               setIsPending(false);
                return;  
          }
+         toast.success('Session Canceled Successfully');
+         setIsPending(false);
          revalidedPath();
+         
     }
     return (
         <div>
             <AlertDialog>
-            <Button className={'bg-[#35858E]'} >Cancel</Button>
+            <Button className={'bg-[#35858E]'} isDisabled={isPending || status =='canceled'} > {isPending ? 'Canceling...' : 'Cancel'}</Button>
             <AlertDialog.Backdrop>
                 <AlertDialog.Container>
                 <AlertDialog.Dialog className="sm:max-w-[400px]">
@@ -52,7 +57,7 @@ const CancelAction = ({BookingId , revalidedPath , tutorId}) => {
                     <Button slot="close" variant="tertiary">
                         Cancel
                     </Button>
-                    <Button slot="close" onClick={handleSubmit} className={'bg-[#35858E]'} >
+                     <Button slot={'close'}  onClick={handleSubmit} className={'bg-[#35858E]'} >
                         Done
                     </Button>
                     </AlertDialog.Footer>
